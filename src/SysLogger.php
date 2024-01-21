@@ -5,7 +5,7 @@ namespace AsiAsiapac\InternalLogger;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class LoggerConnection{
+class SysLogger{
     // (new RabbitMQHelper)->publish('impact_email_invitation', 'test coba belajar');
 	public const INFO = "INFO";
 	public const WARNING = "WARNING";
