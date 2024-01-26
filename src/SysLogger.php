@@ -35,7 +35,7 @@ class SysLogger{
             "note"      => $note,
             "endpoint_type"     => $_ENV['PROJECT_ENDPOINT_TYPE'],
             "source"    => $_ENV['PROJECT_CODE'] ,
-            "time"      => date("Y-m-d\TH:i:s"),
+            "time"      => date("Y-m-d\TH:i:sp"),
             "uuid"      => SysLogger::uuid_v4()
         ];
         $message_json = json_encode( $message );
