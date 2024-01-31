@@ -54,26 +54,29 @@ class UserActivity{
         $channelMQ = $connectMQ->channel(); 
         $queue_name = 'log_user_activity'; 
         $message = [
-            "host"              => $_SERVER['HTTP_HOST'],
-            "remark"            => $remark,
-            "note"              => $note,
-            "endpoint_rules"    => $_SERVER['REQUEST_URI'],
-            "projectcode"       => (!empty($_ENV['PROJECT_CODE'])) ? $_ENV['PROJECT_CODE'] : 'not yet defined',
-            "loggedtime"        => date("Y-m-d\TH:i:s"),
-            'ip'                => $details->getIp(),
-            'city'              => $details->getCity(),
-            'region'            => $details->getRegion(),
-            'country'           => $details->getCountry(),
-            'loc'               => $details->getLatitude().','.$details->getLongitude(),
+            "task" => 'save-user-activity',
+            'collection' => [
+                "host"              => $_SERVER['HTTP_HOST'],
+                "remark"            => $remark,
+                "note"              => $note,
+                "endpoint_rules"    => $_SERVER['REQUEST_URI'],
+                "projectcode"       => (!empty($_ENV['PROJECT_CODE'])) ? $_ENV['PROJECT_CODE'] : 'not yet defined',
+                "loggedtime"        => date("Y-m-d\TH:i:s"),
+                'ip'                => $details->getIp(),
+                'city'              => $details->getCity(),
+                'region'            => $details->getRegion(),
+                'country'           => $details->getCountry(),
+                'loc'               => $details->getLatitude().','.$details->getLongitude(),
 
-            'user_agent'        => $agent_name,
-            'browser'           => $browser,
-            'browserVersion'    => $browserVersion,
-            'platform'          => $platform,
-            'platform_version'  => $platformVersion,
-            'is_mobile'         => ($agent->isPhone()) ? '1' : '0',
-            'is_robot'          => ($agent->isRobot()) ? '1' : '0',
-            'is_browser'        => ($agent->isDesktop()) ? '1' : '0',
+                'user_agent'        => $agent_name,
+                'browser'           => $browser,
+                'browserVersion'    => $browserVersion,
+                'platform'          => $platform,
+                'platform_version'  => $platformVersion,
+                'is_mobile'         => ($agent->isPhone()) ? '1' : '0',
+                'is_robot'          => ($agent->isRobot()) ? '1' : '0',
+                'is_browser'        => ($agent->isDesktop()) ? '1' : '0',
+            ]
         ];
 
         $message_json = json_encode( $message );
