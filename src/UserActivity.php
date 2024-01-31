@@ -12,7 +12,7 @@ class UserActivity{
     private $connection, 
                 $channel = null;
      
-    public static function save( $remark, $note = "" ){
+    public static function save( $username, $remark, $note = "" ){
 
         $ip         = $_SERVER['REMOTE_ADDR'];
         
@@ -59,6 +59,7 @@ class UserActivity{
                 "host"              => $_SERVER['HTTP_HOST'],
                 "remark"            => $remark,
                 "note"              => $note,
+                "username"          => $username,
                 "endpoint_rules"    => $_SERVER['REQUEST_URI'],
                 "projectcode"       => (!empty($_ENV['PROJECT_CODE'])) ? $_ENV['PROJECT_CODE'] : 'not yet defined',
                 "loggedtime"        => date("Y-m-d\TH:i:s"),
