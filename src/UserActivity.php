@@ -62,7 +62,7 @@ class UserActivity{
                 "username"          => $username,
                 "endpoint_rules"    => $_SERVER['REQUEST_URI'],
                 "projectcode"       => (!empty($_ENV['PROJECT_CODE'])) ? $_ENV['PROJECT_CODE'] : 'not yet defined',
-                "loggedtime"        => date("Y-m-d\TH:i:s"),
+                "loggedtime"        => date("Y-m-d\TH:i:sp"),
                 'ip'                => $details->getIp(),
                 'city'              => $details->getCity(),
                 'region'            => $details->getRegion(),
