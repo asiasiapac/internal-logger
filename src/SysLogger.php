@@ -17,7 +17,14 @@ class SysLogger{
                 $channel = null;
 	 
 	public static function save( $level, $task, $remark, $note = "" ){
-         
+        
+        $trace = debug_backtrace();
+
+        $back_func  = $trace[1]['function'];
+        $class      = $trace[1]['class'];
+
+        $refer_class = sprintf('%s\%s', $class, $back_func);
+        
         $connectMQ = new AMQPStreamConnection(
             $_ENV['RABBITMQ_HOST']  , 
             $_ENV['RABBITMQ_PORT'] , 
@@ -36,7 +43,8 @@ class SysLogger{
             "endpoint_type"     => $_ENV['PROJECT_ENDPOINT_TYPE'],
             "source"    => $_ENV['PROJECT_CODE'] ,
             "time"      => date("Y-m-d\TH:i:sp"),
-            "uuid"      => SysLogger::uuid_v4()
+            "uuid"      => SysLogger::uuid_v4(),
+            "refer_class"     => $refer_class
         ];
         $message_json = json_encode( $message );
         $channelMQ->queue_declare($queue_name, true, false, false, false);
